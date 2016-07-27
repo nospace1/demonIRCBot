@@ -18,4 +18,3 @@ TODO:
   3. Eventaully create a separate interpreter for data. One that can handle verbose commands
   4. Allow for saved states.
   5. Allow for either ability usage or response types based on the user.
-  6. this shoudl fix thisngsijflasjfdlas;dkfj
