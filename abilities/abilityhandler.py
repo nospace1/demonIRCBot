@@ -1,9 +1,7 @@
-#from abilities import echo
-#import .. abilities
-#from echo import *
-import echo
-
-
+from echo import *
+from join import *
+from suicide import *
+from addOwner import *
 
 class Ability:
 
@@ -12,7 +10,6 @@ class Ability:
         self.args = args
 
     def execute(self):
-        #exec('{a}.{a}(arg)'.format(a=self.name), {'arg':self.args})
         Abilities.abilityFuncRef[self.name](self.args)
 
 class Abilities:
@@ -39,7 +36,10 @@ class Abilities:
         }
 
     abilityFuncRef = {
-        'echo': echo.echo
+        'echo': echo,
+        'join': join,
+        'suicide': suicide,
+        'addOwner': addOwner
         }
 
     def abilityExists(self, name):

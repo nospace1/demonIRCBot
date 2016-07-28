@@ -24,6 +24,8 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.owners = 'nospace!edarr@yakko.cs.wmich.edu', \
                 kwargs.get('owner', None)
 
+        self.channels = kwargs.get('channels', '#pit')
+
         #This should be a 32 bit data field in which it "describes"
         #what abilities should be available for the bot based on which
         #bits are at 1. 32 bits allows for up to 32 abilities to be dynamically
@@ -41,7 +43,8 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.conn = Connection(nick=self.name)
         self.conn.connect()
         self.conn.register()
-        self.conn.join("#asdf")
+        for ch in self.channels:
+            self.conn.join(ch)
         self.listen()
 
     def talk(self, chan, msg):
@@ -75,11 +78,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         else:
             return False
 
-    def extractData(self, data):
-        return data.split(' ', 2)[2]
-
     def constructDict(self, who, where, data, bot):
-        data = self.extractData(data)
         dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
         return dataDict
 
@@ -115,10 +114,12 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         self.talk(where, "I don't recognize that command")
 
     def listen(self):
-        self.talk('#asdf', "I'm alive!")
-        self.talk('#asdf', \
-            'My name is {n}, my thread ID is {th}, and my owner(s) is/are {own}' \
-            .format(n=self.name, th=self.threadID, own=str(self.owners)))
+        for ch in self.channels:
+            self.talk(ch, "I'm alive!")
+            self.talk(ch, \
+                'My name is {n}, my thread ID is {th}, and my owner(s) is/are {own}' \
+                .format(n=self.name, th=self.threadID, own=str(self.owners)))
+
         while self.allowedToLive: #holy shit this is a sad variable :((((
             try:
                 data = self.conn.recieve();
@@ -139,7 +140,5 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             dataDict['channel'],
                             dataDict['data'],
                             dataDict['mtype'])
-
-
 
 
