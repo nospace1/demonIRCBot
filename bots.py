@@ -3,7 +3,7 @@
 from connection import *
 from messages import *
 import threading
-from abilities.abilitylist import *
+from abilities.abilityhandler import *
 
 #bots have names!
 #bots have owners!
@@ -75,6 +75,14 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         else:
             return False
 
+    def extractData(self, data):
+        return data.split(' ', 2)[2]
+
+    def constructDict(self, who, where, data, bot):
+        data = self.extractData(data)
+        dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
+        return dataDict
+
     def interpret(self, who, where, data, mtype):
         print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
                 .format(bn=self.name, s=data, mt=mtype, u=who, wh=where))
@@ -96,8 +104,8 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                                 #can the bot perform this ability?
                                 print("Permission granted")
                                 self.talk(where, "I'm at your service")
-                                self.talk(where, "I will now die hahaha")
-                                self.kill()
+                                ab = Ability(ability, self.constructDict(who, where, data, self))
+                                ab.execute()
                                 #perform the ability! yaaaay
                             else:
                                 self.talk(where, "you don't own me!")
