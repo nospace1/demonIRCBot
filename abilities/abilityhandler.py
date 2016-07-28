@@ -1,8 +1,10 @@
-from echo import *
-from join import *
-from suicide import *
-from addOwner import *
-from telephone import *
+from .echo import *
+from .join import *
+from .suicide import *
+from .addOwner import *
+from .telephone import *
+from .createImp import *
+from .identify import *
 
 class Ability:
 
@@ -34,6 +36,7 @@ class Abilities:
         'addOwner':         0b00000000000000010000000000000000, # tells what abilities bot has
         'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
         'telephone':        0b00000000000001000000000000000000,
+        'identify':         0b00000000000001000000000000000000,
         }
 
     abilityFuncRef = {
@@ -42,6 +45,8 @@ class Abilities:
         'suicide': suicide,
         'addOwner': addOwner,
         'telephone': telephone,
+        'createImp': createImp,
+        'identify': identify,
 
         }
 

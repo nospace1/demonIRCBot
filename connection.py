@@ -7,7 +7,7 @@ class Connection():
         self.host = kwargs.get('host', 'localhost')
         self.port = kwargs.get('port', 6667)
         self.nick = kwargs.get('nick', 'undefined')
-        self.chan = kwargs.get('channel', '#asdf')
+        self.chan = kwargs.get('channel', '#pit')
         self.ident = kwargs.get('ident', self.nick)
         self.realname = kwargs.get('realname', self.nick)
         self.sock = socket.socket()

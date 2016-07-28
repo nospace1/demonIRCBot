@@ -19,12 +19,12 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         #I think this makes it a thread itself!
         threading.Thread.__init__(self)
         #Not sure what to do about the default name
-        self.name = "undefined"
         #oh boy multiple owners! This is quite the list!
-        self.owners = 'nospace!edarr@yakko.cs.wmich.edu', \
-                kwargs.get('owner', None)
+        self.owners = ('nospace!edarr@yakko.cs.wmich.edu',) + \
+                tuple(kwargs.get('owner', ''))
 
-        self.channels = kwargs.get('channels', '#pit')
+        self.channels = '#pit', kwargs.get('channels', '')
+        self.imps = ()
 
         #This should be a 32 bit data field in which it "describes"
         #what abilities should be available for the bot based on which
@@ -35,7 +35,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
 
         self.allowedToLive = True
 
-        self.name = kwargs['name']
+        self.name = kwargs.get('name', 'undefined')
         self.threadID = kwargs['thrId']
 
     def run(self):
@@ -117,11 +117,11 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         self.gesture(where, "sneers")
 
     def listen(self):
-        for ch in self.channels:
-            self.talk(ch, "I'm alive!")
-            self.talk(ch, \
-                'My name is {n}, my thread ID is {th}, and my owner(s) is/are {own}' \
-                .format(n=self.name, th=self.threadID, own=str(self.owners)))
+        #for ch in self.channels:
+            #self.talk(ch, "I'm alive!")
+            #self.talk(ch, \
+            #    'My name is {n}, my thread ID is {th}, and my owner(s) is/are {own}' \
+            #    .format(n=self.name, th=self.threadID, own=str(self.owners)))
 
         while self.allowedToLive: #holy shit this is a sad variable :((((
             try:
