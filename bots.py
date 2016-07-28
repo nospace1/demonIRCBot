@@ -53,6 +53,9 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
     def talk(self, chan, msg):
         self.conn.privmsg(chan, msg)
 
+    def gesture(self, chan, action):
+        self.conn.action(chan, action)
+
     def kill(self):
         self.allowedToLive = False #:(
 
@@ -96,13 +99,13 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                     print("No ability presented")
                     self.talk(where, '{u}'.format(u=(who.split('!'))[0]))
                 else:
-                    self.talk(where, "Let me see if I know what {a} means...".format(a=ability))
+                    #self.talk(where, "Let me see if I know what {a} means...".format(a=ability))
                     if(self.isValidAbility(ability)):
-                        self.talk(where, "I think I understand this! Let me see if I have this ability")
+                        #self.talk(where, "I think I understand this! Let me see if I have this ability")
                         if(self.hasAbilityRights(Abilities().getAbilValByName(ability))):
-                            self.talk(where, "I can do this ability!")
+                            #self.talk(where, "I can do this ability!")
                             if(who in self.owners):
-                                self.talk(where, "I'm at your service")
+                                #self.talk(where, "I'm at your service")
                                 ab = Ability(ability, self.constructDict(who, where, data, self))
                                 ab.execute()
                             else:
@@ -110,7 +113,8 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         else:
                             self.talk(where, "It's an ability I cannot perform yet")
                     else:
-                        self.talk(where, "I don't recognize that command")
+#                        self.talk(where, "I don't recognize that ability")
+                        self.gesture(where, "sneers")
 
     def listen(self):
         for ch in self.channels:

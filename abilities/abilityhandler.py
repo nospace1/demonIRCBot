@@ -33,7 +33,7 @@ class Abilities:
         'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
         'addOwner':         0b00000000000000010000000000000000, # tells what abilities bot has
         'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
-        'telephone':         0b00000000000001000000000000000000,
+        'telephone':        0b00000000000001000000000000000000,
         }
 
     abilityFuncRef = {

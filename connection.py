@@ -42,6 +42,10 @@ class Connection():
         msg = "PRIVMSG {ch} :{m}\r\n".format(ch=chan, m=message)
         self.sendraw(msg)
 
+    def action(self, chan, action):
+        act = "PRIVMSG {ch} :\x01ACTION {a}\r\n".format(ch=chan, a=action)
+        self.sendraw(act)
+
     def pong(self, message):
         print("I'm ponging: {m}".format(m=message))
         self.sendraw("PONG {m}\r\n".format(m=message))

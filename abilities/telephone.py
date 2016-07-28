@@ -10,6 +10,7 @@ def telephone(dictRef):
         print(data)
         target = data[2] #who it is directed to
         message = data[3]
-        message = "{f} says: {m}".format(f=dictRef['who'], m=message)
+        whoFrom = (dictRef['who'].split('!'))[0] #gets only the nick
+        message = "{f} says: {m}".format(f=whoFrom, m=message)
         dictRef['bot'].talk(target, message)
 
