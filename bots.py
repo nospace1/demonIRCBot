@@ -44,8 +44,11 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.conn.connect()
         self.conn.register()
         for ch in self.channels:
-            self.conn.join(ch)
+            self.joinChan(ch)
         self.listen()
+
+    def joinChan(self, chan):
+        self.conn.join(chan)
 
     def talk(self, chan, msg):
         self.conn.privmsg(chan, msg)
@@ -98,14 +101,10 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         self.talk(where, "I think I understand this! Let me see if I have this ability")
                         if(self.hasAbilityRights(Abilities().getAbilValByName(ability))):
                             self.talk(where, "I can do this ability!")
-                            #this string is directed towards this bot
                             if(who in self.owners):
-                                #can the bot perform this ability?
-                                print("Permission granted")
                                 self.talk(where, "I'm at your service")
                                 ab = Ability(ability, self.constructDict(who, where, data, self))
                                 ab.execute()
-                                #perform the ability! yaaaay
                             else:
                                 self.talk(where, "you don't own me!")
                         else:

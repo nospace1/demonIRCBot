@@ -6,4 +6,4 @@ def join(dictRef):
         dictRef['bot'].talk(dictRef['where'], 'Nothing to join')
     else:
         data = data[2]
-        dictRef['bot'].conn.join(data)
+        dictRef['bot'].joinChan(data)

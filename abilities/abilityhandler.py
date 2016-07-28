@@ -2,6 +2,7 @@ from echo import *
 from join import *
 from suicide import *
 from addOwner import *
+from telephone import *
 
 class Ability:
 
@@ -32,14 +33,16 @@ class Abilities:
         'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
         'addOwner':         0b00000000000000010000000000000000, # tells what abilities bot has
         'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
-
+        'telephone':         0b00000000000001000000000000000000,
         }
 
     abilityFuncRef = {
         'echo': echo,
         'join': join,
         'suicide': suicide,
-        'addOwner': addOwner
+        'addOwner': addOwner,
+        'telephone': telephone,
+
         }
 
     def abilityExists(self, name):
