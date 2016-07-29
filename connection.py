@@ -51,5 +51,3 @@ class Connection():
         self.sendraw("PONG {m}\r\n".format(m=message))
 
 
-
-

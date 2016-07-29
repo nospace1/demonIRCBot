@@ -20,10 +20,11 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         threading.Thread.__init__(self)
         #Not sure what to do about the default name
         #oh boy multiple owners! This is quite the list!
-        self.owners = ('nospace!edarr@yakko.cs.wmich.edu',) + \
-                tuple(kwargs.get('owner', ''))
+        self.owners = ['nospace!edarr@yakko.cs.wmich.edu']
+        self.owners.append(kwargs.get('owner', ''))
 
-        self.channels = '#pit', kwargs.get('channels', '')
+        self.channels = ['#pit']
+        self.channels.append(kwargs.get('channels', ''))
         self.imps = ()
 
         #This should be a 32 bit data field in which it "describes"
@@ -31,7 +32,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         #bits are at 1. 32 bits allows for up to 32 abilities to be dynamically
         #given out. OR by value to give ability, XOR to remove ability. The
         #abilites should be functions available to bots.
-        self.abilityBits = kwargs.get('ablBits', 0)
+        self.abilityBits = kwargs.get('ablBits', 1)
 
         self.allowedToLive = True
 
@@ -113,16 +114,10 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         else:
                             self.talk(where, "It's an ability I cannot perform yet")
                     else:
-#                        self.talk(where, "I don't recognize that ability")
                         self.gesture(where, "sneers")
+                        self.talk(where, "Do you even know what you're doing?")
 
     def listen(self):
-        #for ch in self.channels:
-            #self.talk(ch, "I'm alive!")
-            #self.talk(ch, \
-            #    'My name is {n}, my thread ID is {th}, and my owner(s) is/are {own}' \
-            #    .format(n=self.name, th=self.threadID, own=str(self.owners)))
-
         while self.allowedToLive: #holy shit this is a sad variable :((((
             try:
                 data = self.conn.recieve();
