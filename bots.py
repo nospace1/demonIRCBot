@@ -47,6 +47,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         for ch in self.channels:
             self.joinChan(ch)
         self.listen()
+        print("I'm about to die")
 
     def joinChan(self, chan):
         self.conn.join(chan)
@@ -89,6 +90,11 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
         return dataDict
 
+    def checkLessers(self):
+        for lesser in self.lessers:
+            if(lesser.allowedToLive == False):
+                self.lessers.remove(lesser)
+
     def interpret(self, who, where, data, mtype):
         print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
                 .format(bn=self.name, s=data, mt=mtype, u=who, wh=where))
@@ -100,6 +106,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                     print("No ability presented")
                     self.talk(where, '{u}'.format(u=(who.split('!'))[0]))
                 else:
+                    #ability = ability.lower()
                     #self.talk(where, "Let me see if I know what {a} means...".format(a=ability))
                     if(self.isValidAbility(ability)):
                         #self.talk(where, "I think I understand this! Let me see if I have this ability")
@@ -128,7 +135,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
             for line in data.splitlines():
                 print("Data line: {l}".format(l=line))
                 if 'PING' == line.split()[0]:
-                    print("Recieved a ping message, responding with pong")
+#                    print("Recieved a ping message, responding with pong")
                     self.conn.pong(line.split()[1])
                 #I guess this works, but it removes allowance of mtype interpretation
                 elif 'PRIVMSG' in line:
@@ -138,5 +145,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             dataDict['channel'],
                             dataDict['data'],
                             dataDict['mtype'])
+            self.checkLessers()
 
 

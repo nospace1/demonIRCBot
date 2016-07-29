@@ -1,9 +1,7 @@
 
-#from abilities.abilityhandler import Abilities
+#probably need to rmove this ability it's not useful I don't think
+#will replace with ability "teach"
 import abilityhandler
-#from .. import abilites.abilityhandler
-#from abilityhandler import *
-#import ..abilityhandler
 
 def addAbility(dictRef):
     data = dictRef['data'].split(' ', 2)

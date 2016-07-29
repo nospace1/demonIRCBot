@@ -25,7 +25,6 @@ def identify(dictRef):
             .format(t=dictRef['bot'].threadID))
     dictRef['bot'].talk(dictRef['where'], 'Channels: {c}' \
             .format(c=dictRef['bot'].channels))
-#    for ability in getAllAbilities(dictRef['bot']):
     dictRef['bot'].talk(dictRef['where'], 'Abilities: {a}' \
             .format(a=str(getAllAbilities(dictRef['bot']))))
     dictRef['bot'].talk(dictRef['where'], 'Lessers: {l}' \

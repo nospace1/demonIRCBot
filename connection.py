@@ -47,7 +47,7 @@ class Connection():
         self.sendraw(act)
 
     def pong(self, message):
-        print("I'm ponging: {m}".format(m=message))
+#        print("I'm ponging: {m}".format(m=message))
         self.sendraw("PONG {m}\r\n".format(m=message))
 
 
