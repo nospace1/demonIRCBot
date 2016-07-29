@@ -5,7 +5,7 @@ from .addOwner import *
 from .telephone import *
 from .createImp import *
 from .identify import *
-from .addability import *
+from .teach import *
 from .github import *
 
 __all__ = ['Ability', 'Abilities']
@@ -31,7 +31,7 @@ class Abilities:
 #        'leave':            0b00000000000000000000000100000000, #leaves a channel
 #        'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
 #        'inspectImp':       0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
-#        'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
+        'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
 #        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
 #        'rampage':          0b00000000000000000100000000000000, #demon kills all bots but itself
@@ -51,8 +51,8 @@ class Abilities:
         'telephone': telephone,
         'createImp': createImp,
         'identify': identify,
-#        'addAbility': addAbility,
         'github': github,
+        'teach': teach,
         }
 
     def abilityExists(self, name):

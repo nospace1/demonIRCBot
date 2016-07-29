@@ -20,12 +20,12 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         threading.Thread.__init__(self)
         #Not sure what to do about the default name
         #oh boy multiple owners! This is quite the list!
-        self.owners = ['nospace!edarr@yakko.cs.wmich.edu']
-        self.owners.append(kwargs.get('owner', ''))
+        self.IRCOwners = ['nospace!edarr@yakko.cs.wmich.edu']
+        self.greaters = [] #greaters are bots that are ancestors of this bot
 
         self.channels = ['#pit']
         self.channels.append(kwargs.get('channels', ''))
-        self.lessers = [] #list of bots
+        self.lessers = [] #list of bots who are children of this bot
 
         #This should be a 32 bit data field in which it "describes"
         #what abilities should be available for the bot based on which
@@ -62,7 +62,9 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.allowedToLive = False #:(
 
     def hasLeader(self, data):
-        if(data.lower().startswith(self.name)):
+#        if(data.lower().startswith(self.name)):
+        if(data.split(' ')[0].lower() == (self.name+':') or \
+                data.split(' ')[0].lower() == self.name):
             return True
         else:
             return False
@@ -112,7 +114,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         #self.talk(where, "I think I understand this! Let me see if I have this ability")
                         if(self.hasAbilityRights(Abilities().getAbilValByName(ability))):
                             #self.talk(where, "I can do this ability!")
-                            if(who in self.owners):
+                            if(who in self.IRCOwners):
                                 #self.talk(where, "I'm at your service")
                                 ab = Ability(ability, self.constructDict(who, where, data, self))
                                 ab.execute()
@@ -133,7 +135,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                 print("Unicode is evil")
 
             for line in data.splitlines():
-                print("Data line: {l}".format(l=line))
+#                print("Data line: {l}".format(l=line))
                 if 'PING' == line.split()[0]:
 #                    print("Recieved a ping message, responding with pong")
                     self.conn.pong(line.split()[1])
