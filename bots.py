@@ -25,7 +25,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
 
         self.channels = ['#pit']
         self.channels.append(kwargs.get('channels', ''))
-        self.imps = ()
+        self.lessers = [] #list of bots
 
         #This should be a 32 bit data field in which it "describes"
         #what abilities should be available for the bot based on which

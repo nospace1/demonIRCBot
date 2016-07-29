@@ -6,7 +6,7 @@ from .telephone import *
 from .createImp import *
 from .identify import *
 from .addability import *
-
+from .github import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -31,15 +31,16 @@ class Abilities:
         'leave':            0b00000000000000000000000100000000, #leaves a channel
         'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
         'inspectImp':       0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
-        'addAbility':       0b00000000000000000000100000000000, #abilities can only be added by another bot.
-        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon
+        'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
+        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
         'rampage':          0b00000000000000000100000000000000, #demon kills all bots but itself
         'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
         'addOwner':         0b00000000000000010000000000000000, # tells what abilities bot has
         'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
         'telephone':        0b00000000000001000000000000000000,
-        'identify':         0b00000000000010000000000000000000,
+        'identify':         0b00000000000010000000000000000000, #displays information about the bot
+        'github':           0b00000000000100000000000000000000, #prints a link to the github :D
         }
 
     abilityFuncRef = {
@@ -51,6 +52,7 @@ class Abilities:
         'createImp': createImp,
         'identify': identify,
         'addAbility': addAbility,
+        'github': github,
         }
 
     def abilityExists(self, name):

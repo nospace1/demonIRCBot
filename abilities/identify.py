@@ -10,6 +10,12 @@ def getAllAbilities(bot):
             abilitylist.append(ability)
     return abilitylist
 
+def getLesserNameList(lesserlist):
+    lesserNames = []
+    for less in lesserlist:
+        lesserNames.append(less.name)
+    return lesserNames
+
 def identify(dictRef):
     dictRef['bot'].talk(dictRef['where'], 'Name: {n}' \
             .format(n=dictRef['bot'].name))
@@ -22,4 +28,6 @@ def identify(dictRef):
 #    for ability in getAllAbilities(dictRef['bot']):
     dictRef['bot'].talk(dictRef['where'], 'Abilities: {a}' \
             .format(a=str(getAllAbilities(dictRef['bot']))))
+    dictRef['bot'].talk(dictRef['where'], 'Lessers: {l}' \
+                .format(l=str(getLesserNameList(dictRef['bot'].lessers))))
 
