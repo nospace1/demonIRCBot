@@ -1,9 +1,11 @@
 
 
-# needs to kill all children to be able to die
-def suicide(dictRef):
+
+#pretty much teh same as suicide but this bot doesn't
+#kill itself at the end
+def rampage(dictRef):
     bot = dictRef['bot']
-    bot.talk(dictRef['where'], "I will be back...")
+    bot.talk(dictRef['where'], "DIE")
 
     for lesser in bot.lessers:
         if(lesser.allowedToLive == False):
@@ -13,4 +15,4 @@ def suicide(dictRef):
         for lesser in bot.lessers:
             lesser.kill()
 
-    bot.kill()
+

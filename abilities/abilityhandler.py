@@ -7,6 +7,7 @@ from .createImp import *
 from .identify import *
 from .teach import *
 from .github import *
+from .rampage import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -34,7 +35,7 @@ class Abilities:
         'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
 #        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
-#        'rampage':          0b00000000000000000100000000000000, #demon kills all bots but itself
+        'rampage':          0b00000000000000000100000000000000, #greater kills all its lessers
 #        'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
         'addowner':         0b00000000000000010000000000000000, # tells what abilities bot has
 #        'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
@@ -53,6 +54,7 @@ class Abilities:
         'identify': identify,
         'github': github,
         'teach': teach,
+        'rampage': rampage,
         }
 
     def abilityExists(self, name):
