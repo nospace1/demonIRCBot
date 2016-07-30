@@ -4,8 +4,6 @@ import abilityhandler
 def getAllAbilities(bot):
     abilitylist = []
     for ability, value in abilityhandler.Abilities().abilityPermissions.items():
-        print(ability)
-        print(value)
         if value & bot.abilityBits:
             abilitylist.append(ability)
     return abilitylist

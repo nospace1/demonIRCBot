@@ -24,7 +24,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.greaters = [] #greaters are bots that are ancestors of this bot
 
         self.channels = ['#pit']
-        self.channels.append(kwargs.get('channels', ''))
+#        self.channels.append(kwargs.get('channels', ''))
         self.lessers = [] #list of bots who are children of this bot
 
         #This should be a 32 bit data field in which it "describes"
@@ -92,7 +92,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
         return dataDict
 
-    def checkLessers(self):
+    def checkForDead(self):
         for lesser in self.lessers:
             if(lesser.allowedToLive == False):
                 self.lessers.remove(lesser)
@@ -108,7 +108,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                     print("No ability presented")
                     self.talk(where, '{u}'.format(u=(who.split('!'))[0]))
                 else:
-                    #ability = ability.lower()
+                    ability = ability.lower()
                     #self.talk(where, "Let me see if I know what {a} means...".format(a=ability))
                     if(self.isValidAbility(ability)):
                         #self.talk(where, "I think I understand this! Let me see if I have this ability")
@@ -147,6 +147,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             dataDict['channel'],
                             dataDict['data'],
                             dataDict['mtype'])
-            self.checkLessers()
+            self.checkForDead()
 
 

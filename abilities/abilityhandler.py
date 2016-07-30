@@ -23,7 +23,7 @@ class Abilities:
         'echo':             0b00000000000000000000000000000001,
 #        'timedEvent':       0b00000000000000000000000000000010,
 #        'createWorker':     0b00000000000000000000000000000100, #workers are for specific tasks then die
-        'createImp':        0b00000000000000000000000000001000, #lowered permissions and unique controller
+        'createimp':        0b00000000000000000000000000001000, #lowered permissions and unique controller
 #        'smite':            0b00000000000000000000000000010000, #demon kills a bot, aka sends it a pm to suicide
 #        'kick':             0b00000000000000000000000000100000,
 #        'asciiSwarm':       0b00000000000000000000000001000000, #demon creates ascii art using workers
@@ -36,7 +36,7 @@ class Abilities:
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
 #        'rampage':          0b00000000000000000100000000000000, #demon kills all bots but itself
 #        'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
-        'addOwner':         0b00000000000000010000000000000000, # tells what abilities bot has
+        'addowner':         0b00000000000000010000000000000000, # tells what abilities bot has
 #        'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
         'telephone':        0b00000000000001000000000000000000,
         'identify':         0b00000000000010000000000000000000, #displays information about the bot
@@ -47,9 +47,9 @@ class Abilities:
         'echo': echo,
         'join': join,
         'suicide': suicide,
-        'addOwner': addOwner,
+        'addowner': addOwner,
         'telephone': telephone,
-        'createImp': createImp,
+        'createimp': createImp,
         'identify': identify,
         'github': github,
         'teach': teach,

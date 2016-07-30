@@ -6,4 +6,8 @@ def join(dictRef):
         dictRef['bot'].talk(dictRef['where'], 'Nothing to join')
     else:
         data = data[2]
-        dictRef['bot'].joinChan(data)
+        if(data.startswith('#')):
+            dictRef['bot'].joinChan(data)
+            dictRef['bot'].channels.append(data)
+        else:
+            dictRef['bot'].talk(dictRef['where'], 'Bad channel name')

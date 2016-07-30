@@ -1,6 +1,15 @@
 import bots
 import abilityhandler
 
+#all the greaters of this imp need to have
+#this imp as a lesser
+#this works becaues for each greater
+#there is a lesser relationship
+def updateLessersInGreaters(imp):
+    for great in imp.greaters:
+        if imp not in great.lessers:
+            great.lessers.append(imp)
+
 def createImp(dictRef):
     data = dictRef['data'].split(' ', 2)
     if(len(data) < 3):
@@ -26,6 +35,10 @@ def createImp(dictRef):
             # adds all bot owners into a list aka greaters
             for great in dictRef['bot'].greaters:
                 imp.greaters = list(set(dictRef['bot'].greaters) | set(imp.greaters))
+            #update the lessers of the greaters to include new imp
+            updateLessersInGreaters(imp)
             imp.start()
         else:
             dictRef['bot'].talk(dictRef['where'], "Name too long")
+
+
