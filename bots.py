@@ -23,8 +23,9 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.IRCOwners = ['nospace!edarr@yakko.cs.wmich.edu']
         self.greaters = [] #greaters are bots that are ancestors of this bot
 
-        self.channels = ['#pit']
-#        self.channels.append(kwargs.get('channels', ''))
+        self.channels = ['#thepit']
+        if(kwargs['channels'] not in self.channels):
+            self.channels.append(kwargs.get('channels'))
         self.lessers = [] #list of bots who are children of this bot
 
         #This should be a 32 bit data field in which it "describes"
@@ -38,6 +39,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
 
         self.name = kwargs.get('name', 'undefined')
         self.threadID = kwargs['thrId']
+
 
     def run(self):
         #needs its own connection to the server!
@@ -58,7 +60,25 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
     def gesture(self, chan, action):
         self.conn.action(chan, action)
 
+    def examine(self, who):
+        self.conn.lookup(who)
+
     def kill(self):
+        #removes itself from the greaters as a lesser
+#        for less in self.greaters.lessers:
+#            if(self in less.lessers):
+#                less.lessers.remove(self)
+
+        #removes resources in the greaters as a lesser
+        for great in self.greaters:
+            if(self in great.lessers):
+                great.lessers.remove(self)
+
+        #removes resources in the lessers as a greater
+        for less in self.lessers:
+            if(self in less.greaters):
+                less.greaters.remove(self)
+
         self.allowedToLive = False #:(
 
     def hasLeader(self, data):
@@ -92,10 +112,12 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
         return dataDict
 
-    def checkForDead(self):
-        for lesser in self.lessers:
-            if(lesser.allowedToLive == False):
-                self.lessers.remove(lesser)
+
+    #needs better soluation I think, should be handled on deaths
+#    def checkForDead(self):
+#        for lesser in self.lessers:
+#            if(lesser.allowedToLive == False):
+#                self.lessers.remove(lesser)
 
     def interpret(self, who, where, data, mtype):
         print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
@@ -116,6 +138,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             #self.talk(where, "I can do this ability!")
                             if(who in self.IRCOwners):
                                 #self.talk(where, "I'm at your service")
+                                self.examine(who.split('!')[0])
                                 ab = Ability(ability, self.constructDict(who, where, data, self))
                                 ab.execute()
                             else:
@@ -147,6 +170,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             dataDict['channel'],
                             dataDict['data'],
                             dataDict['mtype'])
-            self.checkForDead()
+#            self.checkForDead()
 
 

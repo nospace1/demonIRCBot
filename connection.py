@@ -50,4 +50,7 @@ class Connection():
 #        print("I'm ponging: {m}".format(m=message))
         self.sendraw("PONG {m}\r\n".format(m=message))
 
+    def lookup(self, user):
+        self.sendraw("WHOIS {u}\r\n".format(u=user))
+
 

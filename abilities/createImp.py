@@ -24,6 +24,8 @@ def createImp(dictRef):
                 abilityhandler.Abilities().getAbilValByName('suicide') | \
                 abilityhandler.Abilities().getAbilValByName('identify') | \
                 abilityhandler.Abilities().getAbilValByName('github') | \
+                abilityhandler.Abilities().getAbilValByName('rampage') | \
+                abilityhandler.Abilities().getAbilValByName('createimp') | \
                 abilityhandler.Abilities().getAbilValByName('join')), \
                 channels=dictRef['where'])
             dictRef['bot'].lessers.append(imp) #adds actual bot to list of original bots
@@ -37,6 +39,7 @@ def createImp(dictRef):
                 imp.greaters = list(set(dictRef['bot'].greaters) | set(imp.greaters))
             #update the lessers of the greaters to include new imp
             updateLessersInGreaters(imp)
+            #imp.channels.append(dictRef['where'])
             imp.start()
         else:
             dictRef['bot'].talk(dictRef['where'], "Name too long")
