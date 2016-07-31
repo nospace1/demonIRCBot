@@ -54,6 +54,9 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
     def joinChan(self, chan):
         self.conn.join(chan)
 
+    def leave(self, chan):
+        self.conn.part(chan)
+
     def talk(self, chan, msg):
         self.conn.privmsg(chan, msg)
 
@@ -64,11 +67,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         self.conn.lookup(who)
 
     def kill(self):
-        #removes itself from the greaters as a lesser
-#        for less in self.greaters.lessers:
-#            if(self in less.lessers):
-#                less.lessers.remove(self)
-
         #removes resources in the greaters as a lesser
         for great in self.greaters:
             if(self in great.lessers):
@@ -112,12 +110,9 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         dataDict = {'who':who, 'where':where, 'data':data, 'conn':self.conn, 'bot':bot}
         return dataDict
 
-
-    #needs better soluation I think, should be handled on deaths
-#    def checkForDead(self):
-#        for lesser in self.lessers:
-#            if(lesser.allowedToLive == False):
-#                self.lessers.remove(lesser)
+    def performAbility(self, ability, dictRef):
+        ab = Ability(ability,dictRef)
+        ab.execute()
 
     def interpret(self, who, where, data, mtype):
         print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
@@ -131,16 +126,12 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                     self.talk(where, '{u}'.format(u=(who.split('!'))[0]))
                 else:
                     ability = ability.lower()
-                    #self.talk(where, "Let me see if I know what {a} means...".format(a=ability))
                     if(self.isValidAbility(ability)):
-                        #self.talk(where, "I think I understand this! Let me see if I have this ability")
                         if(self.hasAbilityRights(Abilities().getAbilValByName(ability))):
-                            #self.talk(where, "I can do this ability!")
                             if(who in self.IRCOwners):
-                                #self.talk(where, "I'm at your service")
-                                self.examine(who.split('!')[0])
-                                ab = Ability(ability, self.constructDict(who, where, data, self))
-                                ab.execute()
+#                                self.examine(who.split('!')[0])
+                                abilityDict = self.constructDict(who, where, data, self)
+                                self.performAbility(ability, abilityDict)
                             else:
                                 self.talk(where, "you don't own me!")
                         else:
@@ -170,6 +161,5 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                             dataDict['channel'],
                             dataDict['data'],
                             dataDict['mtype'])
-#            self.checkForDead()
 
 

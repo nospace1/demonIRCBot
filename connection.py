@@ -34,6 +34,9 @@ class Connection():
     def join(self, chan):
         self.sendraw("JOIN {ch}\r\n".format(ch=chan))
 
+    def part(self, chan):
+        self.sendraw("PART {ch}\r\n".format(ch=chan))
+
     def recieve(self):
         data = self.sock.recv(4096).decode()
         return data

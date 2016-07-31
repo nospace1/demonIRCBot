@@ -8,6 +8,8 @@ from .identify import *
 from .teach import *
 from .github import *
 from .rampage import *
+from .leave import *
+from .yell import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -29,8 +31,8 @@ class Abilities:
 #        'kick':             0b00000000000000000000000000100000,
 #        'asciiSwarm':       0b00000000000000000000000001000000, #demon creates ascii art using workers
         'join':             0b00000000000000000000000010000000,
-#        'leave':            0b00000000000000000000000100000000, #leaves a channel
-#        'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
+        'leave':            0b00000000000000000000000100000000, #leaves a channel
+        'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
 #        'inspectImp':       0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
         'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
 #        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
@@ -55,6 +57,8 @@ class Abilities:
         'github': github,
         'teach': teach,
         'rampage': rampage,
+        'leave': leave,
+        'yell': yell,
         }
 
     def abilityExists(self, name):
