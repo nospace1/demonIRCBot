@@ -28,6 +28,7 @@ def checkForNameDups(name, dictRef):
         status = False
     return status
 
+#NONE OF THIS WORKS WHY
 def validName(name):
 #    irc_nick = re.compile("/\A[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]*\z/")
 #    irc_nick = re.compile('[a-z_\-\[\]\\^{}|`][a-z0-9_\-\[\]\\^{}|`]{2,15}\z/i')

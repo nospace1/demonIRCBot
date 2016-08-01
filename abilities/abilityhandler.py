@@ -10,7 +10,7 @@ from .github import *
 from .rampage import *
 from .leave import *
 from .yell import *
-#from .createswarm import *
+from .createswarm import *
 from .broadcast import *
 from .becomeswarm import *
 
@@ -47,7 +47,7 @@ class Abilities:
         'telephone':        0b00000000000001000000000000000000,
         'identify':         0b00000000000010000000000000000000, #displays information about the bot
         'github':           0b00000000000100000000000000000000, #prints a link to the github :D
-#        'createswarm':      0b00000000001000000000000000000000, #prints a link to the github :D
+        'createswarm':      0b00000000001000000000000000000000, #creates a swarm!!
         }
 
     abilityFuncRef = {
@@ -64,8 +64,8 @@ class Abilities:
         'leave': leave,
         'yell': yell,
         'broadcast': broadcast,
-        'becomeswarm': becomeswarm
-#        'createswarm': createswarm,
+        'becomeswarm': becomeswarm,
+        'createswarm': createswarm,
         }
 
     def abilityExists(self, name):
