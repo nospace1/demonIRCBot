@@ -10,6 +10,9 @@ from .github import *
 from .rampage import *
 from .leave import *
 from .yell import *
+#from .createswarm import *
+from .broadcast import *
+from .becomeswarm import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -33,17 +36,18 @@ class Abilities:
         'join':             0b00000000000000000000000010000000,
         'leave':            0b00000000000000000000000100000000, #leaves a channel
         'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
-#        'inspectImp':       0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
+        'becomeswarm':      0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
         'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
 #        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
         'rampage':          0b00000000000000000100000000000000, #greater kills all its lessers
-#        'abilityList':      0b00000000000000001000000000000000, # tells what abilities bot has
+        'broadcast':        0b00000000000000001000000000000000, # tells what abilities bot has
         'addowner':         0b00000000000000010000000000000000, # tells what abilities bot has
 #        'removeOwner':      0b00000000000000100000000000000000, # tells what abilities bot has
         'telephone':        0b00000000000001000000000000000000,
         'identify':         0b00000000000010000000000000000000, #displays information about the bot
         'github':           0b00000000000100000000000000000000, #prints a link to the github :D
+#        'createswarm':      0b00000000001000000000000000000000, #prints a link to the github :D
         }
 
     abilityFuncRef = {
@@ -59,6 +63,9 @@ class Abilities:
         'rampage': rampage,
         'leave': leave,
         'yell': yell,
+        'broadcast': broadcast,
+        'becomeswarm': becomeswarm
+#        'createswarm': createswarm,
         }
 
     def abilityExists(self, name):

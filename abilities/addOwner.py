@@ -8,7 +8,8 @@ def addOwner(dictRef):
         dictRef['bot'].talk(dictRef['where'], 'No owner specified')
     else:
         data = data[2]
-        dictRef['bot'].IRCOwners.append(data)# = dictRef['bot'].owners + (data,)
+        if(data not in dictRef['bot'].IRCOwners):
+            dictRef['bot'].IRCOwners.append(data)# = dictRef['bot'].owners + (data,)
 #        print(dictRef['bot'].owners)
 
 

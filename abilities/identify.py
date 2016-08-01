@@ -35,5 +35,9 @@ def identify(dictRef):
                 .format(l=str(getLesserNameList(dictRef['bot'].lessers))))
     dictRef['bot'].talk(dictRef['where'], 'Greaters: {g}' \
                 .format(g=str(getGreaterNameList(dictRef['bot'].greaters))))
+    dictRef['bot'].talk(dictRef['where'], 'Is Swarm leader: {s}' \
+                .format(s=str(dictRef['bot'].isSwarm)))
+
+
 
 

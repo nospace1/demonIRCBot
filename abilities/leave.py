@@ -6,6 +6,8 @@ def leave(dictRef):
     if(len(data) > 2):
         specChan = data[2]
         bot.leave(specChan)
+        bot.channels.remove(specChan)
     else:
         bot.leave(dictRef['where'])
+        bot.channels.remove(dictRef['where'])
 

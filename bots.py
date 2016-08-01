@@ -20,7 +20,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         threading.Thread.__init__(self)
         #Not sure what to do about the default name
         #oh boy multiple owners! This is quite the list!
-        self.IRCOwners = ['nospace!edarr@yakko.cs.wmich.edu']
+        self.IRCOwners = ['nospace!edarr@yakko.cs.wmich.edu'] #, 'hellbacon!hellbacon@yakko.cs.wmich.edu']
         self.greaters = [] #greaters are bots that are ancestors of this bot
 
         self.channels = ['#thepit']
@@ -34,7 +34,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         #given out. OR by value to give ability, XOR to remove ability. The
         #abilites should be functions available to bots.
         self.abilityBits = kwargs.get('ablBits', 1)
-
+        self.isSwarm = False
         self.allowedToLive = True
 
         self.name = kwargs.get('name', 'undefined')
@@ -49,7 +49,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         for ch in self.channels:
             self.joinChan(ch)
         self.listen()
-        print("I'm about to die")
 
     def joinChan(self, chan):
         self.conn.join(chan)
@@ -88,7 +87,8 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
             return False
 
     def getAbilityFromData(self, data):
-        ability = data.split(' ')
+        ability = data.split(' ', 3)
+        print(data)
         if(len(ability) < 2): #means the ability is missing
             return None
         return ability[1]
@@ -114,10 +114,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
         ab = Ability(ability,dictRef)
         ab.execute()
 
-    def interpret(self, who, where, data, mtype):
-        print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
-                .format(bn=self.name, s=data, mt=mtype, u=who, wh=where))
-        data = data.strip()
+    def validateAll(self, who, where, data, mtype):
         if(data != None):
             if(self.hasLeader(data)):
                 ability = self.getAbilityFromData(data)
@@ -130,15 +127,33 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                         if(self.hasAbilityRights(Abilities().getAbilValByName(ability))):
                             if(who in self.IRCOwners):
 #                                self.examine(who.split('!')[0])
-                                abilityDict = self.constructDict(who, where, data, self)
-                                self.performAbility(ability, abilityDict)
+                                return True
+                                #abilityDict = self.constructDict(who, where, data, self)
+                                #self.performAbility(ability, abilityDict)
                             else:
                                 self.talk(where, "you don't own me!")
+                                return False
                         else:
                             self.talk(where, "It's an ability I cannot perform yet")
+                            return False
                     else:
                         self.gesture(where, "sneers")
                         self.talk(where, "Do you even know what you're doing?")
+                        return False
+
+    def interpret(self, who, where, data, mtype):
+        print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
+                .format(bn=self.name, s=data, mt=mtype, u=who, wh=where))
+        #print("I am TRYING to interpret this shit before strip: " + str(data))
+        #print("I am TRYING to interpret thi shit: " + str(data))
+        if(self.validateAll(who, where, data, mtype)):
+            data = data.strip()
+            ability = self.getAbilityFromData(data)
+            ability = ability.lower()
+            if(self.isSwarm):
+                ability = 'broadcast'
+            abilityDict = self.constructDict(who, where, data, self)
+            self.performAbility(ability, abilityDict)
 
     def listen(self):
         while self.allowedToLive: #holy shit this is a sad variable :((((
