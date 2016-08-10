@@ -1,4 +1,4 @@
-
+import time
 def noExistingSwarm(origin):
     #CHECK EVERYWHERAJLEJ
     for less in origin.lessers:
@@ -47,6 +47,7 @@ def createswarm(dictRef):
                         for x in xrange(size):
                             swarmlingRef['data'] = '{n} createimp {s}'.format(n='swarm', s=swarmlingNames+str(x+1))
                             swarmlingRef['bot'].performAbility('createimp', swarmlingRef)
+#                            time.sleep(2)
 
                         #then set variable
                         swarmlingRef['bot'].isSwarm = True

@@ -144,8 +144,6 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
     def interpret(self, who, where, data, mtype):
         print("\033[93m[{bn}>] Interpreting {s} of {mt} from {u} in channel {wh}\033[0m"\
                 .format(bn=self.name, s=data, mt=mtype, u=who, wh=where))
-        #print("I am TRYING to interpret this shit before strip: " + str(data))
-        #print("I am TRYING to interpret thi shit: " + str(data))
         if(self.validateAll(who, where, data, mtype)):
             data = data.strip()
             ability = self.getAbilityFromData(data)
@@ -164,9 +162,7 @@ class Bot(threading.Thread): #bots are actually threads, who knew?
                 print("Unicode is evil")
 
             for line in data.splitlines():
-#                print("Data line: {l}".format(l=line))
                 if 'PING' == line.split()[0]:
-#                    print("Recieved a ping message, responding with pong")
                     self.conn.pong(line.split()[1])
                 #I guess this works, but it removes allowance of mtype interpretation
                 elif 'PRIVMSG' in line:

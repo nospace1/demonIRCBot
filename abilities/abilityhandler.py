@@ -13,6 +13,8 @@ from .yell import *
 from .createswarm import *
 from .broadcast import *
 from .becomeswarm import *
+from .timedevent import *
+from .repeat import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -27,8 +29,8 @@ class Ability:
 class Abilities:
     abilityPermissions = {
         'echo':             0b00000000000000000000000000000001,
-#        'timedEvent':       0b00000000000000000000000000000010,
-#        'createWorker':     0b00000000000000000000000000000100, #workers are for specific tasks then die
+        'timedevent':       0b00000000000000000000000000000010,
+        'repeat':           0b00000000000000000000000000000100, #workers are for specific tasks then die
         'createimp':        0b00000000000000000000000000001000, #lowered permissions and unique controller
 #        'smite':            0b00000000000000000000000000010000, #demon kills a bot, aka sends it a pm to suicide
 #        'kick':             0b00000000000000000000000000100000,
@@ -38,7 +40,7 @@ class Abilities:
         'yell':             0b00000000000000000000001000000000, #like echo but does it to all buffers that it is in
         'becomeswarm':      0b00000000000000000000010000000000, #gets information about demonite (owner, buffers, alias, etc)
         'teach':            0b00000000000000000000100000000000, #abilities can only be added by an ownerbot, and the owner must already know that ability
-#        'killAll':          0b00000000000000000001000000000000, #kills all bots including demon, probably will not make this
+#        'createsuperswarm':          0b00000000000000000001000000000000, #uses processes to exceed the thread limit
         'suicide':          0b00000000000000000010000000000000, #bot kills itself
         'rampage':          0b00000000000000000100000000000000, #greater kills all its lessers
         'broadcast':        0b00000000000000001000000000000000, # tells what abilities bot has
@@ -48,6 +50,8 @@ class Abilities:
         'identify':         0b00000000000010000000000000000000, #displays information about the bot
         'github':           0b00000000000100000000000000000000, #prints a link to the github :D
         'createswarm':      0b00000000001000000000000000000000, #creates a swarm!!
+#        'spam':             0b00000000010000000000000000000000, #pulls random spam line from file
+#        'macro':             0b00000000010000000000000000000000, #macros are a defined ability created from a collection of other abilities
         }
 
     abilityFuncRef = {
@@ -66,6 +70,9 @@ class Abilities:
         'broadcast': broadcast,
         'becomeswarm': becomeswarm,
         'createswarm': createswarm,
+        'timedevent': timedevent,
+        'repeat': repeat,
+#        'spam': spam,
         }
 
     def abilityExists(self, name):
