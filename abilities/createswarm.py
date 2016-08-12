@@ -1,4 +1,3 @@
-import time
 def noExistingSwarm(origin):
     #CHECK EVERYWHERAJLEJ
     for less in origin.lessers:
