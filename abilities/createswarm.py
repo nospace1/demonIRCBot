@@ -14,6 +14,9 @@ def findSwarmBot(bot):
             return less
 
 def createswarm(dictRef):
+    """
+    Usage: [botname] createswarm [number 1-30] [name with char length 1-6]
+    """
     #led by a bot named swarm.
     #if another swarm is created it is appended a number aka swarm2
     #the syntax is as follows:

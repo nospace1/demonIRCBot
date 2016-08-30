@@ -1,5 +1,4 @@
 
-
 #dict_ref = who, where, data, conn, bot
 def echo(dictRef):
     data = dictRef['data'].split(' ', 2)

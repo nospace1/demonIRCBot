@@ -15,7 +15,8 @@ from .broadcast import *
 from .becomeswarm import *
 from .timedevent import *
 from .repeat import *
-#from .help import *
+from .help import *
+from .timerrepeat import *
 
 __all__ = ['Ability', 'Abilities']
 class Ability:
@@ -51,7 +52,8 @@ class Abilities:
         'identify':         0b00000000000010000000000000000000, #displays information about the bot
         'github':           0b00000000000100000000000000000000, #prints a link to the github :D
         'createswarm':      0b00000000001000000000000000000000, #creates a swarm!!
-        'help':             0b00000000010000000000000000000000, #creates a swarm!!
+        'help':           0b00000000010000000000000000000000, #creates a swarm!!
+        'timerrepeat':      0b00000000100000000000000000000000, #creates a swarm!!
 #        'spam':             0b00000000010000000000000000000000, #pulls random spam line from file
 #        'macro':             0b00000000010000000000000000000000, #macros are a defined ability created from a collection of other abilities
         }
@@ -75,6 +77,7 @@ class Abilities:
         'timedevent': timedevent,
         'repeat': repeat,
         'help': help,
+        'timerrepeat': timerrepeat,
 #        'spam': spam,
         }
 
@@ -88,6 +91,8 @@ class Abilities:
     def getAbilNameByVal(self, value):
         rev_dict = dict((v,k) for k,v in self.abilityList.iteritems())
         return rev_dict[value]
+
+
 
 
 
